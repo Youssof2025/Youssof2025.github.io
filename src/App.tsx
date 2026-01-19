@@ -4,6 +4,7 @@ import Nav from "./Components/Nav";
 import Projects from "./Components/projects";
 import About from "./Components/about";
 import Home from "./Components/home";
+import Photography from "./Components/photography";
 
 function App() {
   return (
@@ -11,9 +12,10 @@ function App() {
       <Nav />
       <main className="p-8">
         <Routes>
-          <Route path="/" element={<h1>Welcome to my Engineering Portfolio</h1>} />
+          <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/about" element={<About />} />
+          <Route path="/photography" element={<Photography />} />
         </Routes>
       </main>
     </div>
