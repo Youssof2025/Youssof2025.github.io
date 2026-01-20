@@ -6,7 +6,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   navigationMenuTriggerStyle,
-} from "@/Components/ui/navigation-menu";
+} from "@/components/ui/navigation-menu";
 
 const Nav = () => {
   return (

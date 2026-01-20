@@ -1,10 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import Nav from "./Components/Nav";
-import Projects from "./Components/projects";
-import About from "./Components/about";
-import Home from "./Components/home";
-import Photography from "./Components/photography";
-import ProjectDetails from "./Components/ProjectDetails";
+import Nav from "./components/Nav";
+import Projects from "./components/projects";
+import About from "./components/about";
+import Home from "./components/home";
+import Photography from "./components/photography";
+import ProjectDetails from "./components/ProjectDetails";
 
 
 function App() {
