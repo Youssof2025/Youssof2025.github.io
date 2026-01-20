@@ -7,10 +7,10 @@ interface ProjectProps {
   liveUrl?: string;
 }
 
-export const ProjectCard = ({ title, description, tags, imageUrl, githubUrl, liveUrl }: ProjectProps) => {
+export const ProjectCard = ({ title, description, tags, imageUrl }: ProjectProps) => {
   return (
     <div className="rounded-xl border bg-card overflow-hidden shadow-sm transition-hover hover:shadow-md">
-      {/* Image Header */}
+      
       <div className="aspect-video w-full overflow-hidden bg-muted">
         <img 
           src={imageUrl} 
