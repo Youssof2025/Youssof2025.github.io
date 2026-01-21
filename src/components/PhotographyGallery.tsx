@@ -28,6 +28,12 @@ const photos = [
     title: 'Mountain Side',
     category: 'Landscape',
     details: 'ISO 100 | f/6.3 | 1/320s'
+  },
+  {
+    src: '/images/photography/squirrel-in-snow.jpg',
+    title: 'Snowy Squirrel',
+    category: 'Landscape',
+    details: 'ISO 200 | f/6.3 | 1/500s'
   }
 ];
 
