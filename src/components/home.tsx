@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Linkedin } from 'lucide-react';
+
 
 const Home = () => {
   return (
@@ -25,6 +27,16 @@ const Home = () => {
             rel="noopener noreferrer"
           >
             Resume
+          </a>
+        </Button>
+        <Button variant="linkedin" asChild>
+          <a
+            href="https://www.linkedin.com/in/youssofsoliman" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <Linkedin className="size-4" />
+            LinkedIn
           </a>
         </Button>
       </div>
