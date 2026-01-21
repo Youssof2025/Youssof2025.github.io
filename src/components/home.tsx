@@ -17,6 +17,16 @@ const Home = () => {
         <Button variant="outline" asChild>
           <Link to="/photography">See Photography</Link>
         </Button>
+      
+        <Button variant="outline" asChild>
+          <a 
+            href="/Youssof-Resume.pdf" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            Resume
+          </a>
+        </Button>
       </div>
     </div>
   );
