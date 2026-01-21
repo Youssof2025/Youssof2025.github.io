@@ -15,19 +15,19 @@ const photos = [
     src: '/images/photography/snowy-path.JPG',
     title: 'Snowy Path',
     category: 'Landscape',
-    details: 'ISO 360 | f/6.3| 1/500s'
+    details: 'ISO 360 | f/6.3 | 1/500s'
   },
   {
     src: '/images/photography/mountain-valley.JPG',
     title: 'Mountain Valley',
     category: 'Landscape',
-    details: 'ISO 100 | f/8| 1/400s'
+    details: 'ISO 100 | f/8 | 1/400s'
   },
   {
     src: '/images/photography/sunny-mountain.JPG',
     title: 'Mountain Side',
     category: 'Landscape',
-    details: 'ISO 100 | f/6.3| 1/320s'
+    details: 'ISO 100 | f/6.3 | 1/320s'
   }
 ];
 
