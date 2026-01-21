@@ -2,7 +2,7 @@ export interface ProjectSection {
   type: "text" | "side-by-side" | "full-image";
   text?: string;
   imagePath?: string;
-  reverse?: boolean; // If true, image appears on the left
+  reverse?: boolean;
 }
 
 export interface Project {
@@ -25,6 +25,10 @@ export const projectsData: Project[] = [
       {
         type: "text",
         text: "The TRD-1 was developed to monitor the internal temperatures for a custom built carbon fiber oven for the Mines Formula SAE team, ensuring precise thermal monitoring during the curing process to ensure optimal results for the car."
+      },
+      {
+        type: "full-image",
+        imagePath: "/images/projects/trd-1-pcb.png",
       },
       {
         type: "side-by-side",
