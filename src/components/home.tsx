@@ -12,7 +12,7 @@ const Home = () => {
       <p className="max-w-[700px] text-lg text-muted-foreground mb-8">
         Freshman at Colorado School of Mines specializing in PCB-Design, circuit design, and with a hobby in photography.
       </p>
-      <div className="flex gap-4">
+      <div className="flex flex-wrap justify-center gap-4 w-full max-w-[90vw]">
         <Button asChild>
           <Link to="/projects">View Projects</Link>
         </Button>
