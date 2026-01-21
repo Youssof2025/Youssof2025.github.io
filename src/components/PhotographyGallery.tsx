@@ -1,3 +1,8 @@
+import { useState } from "react";
+import Lightbox from "yet-another-react-lightbox";
+import Captions from "yet-another-react-lightbox/plugins/captions";
+import "yet-another-react-lightbox/styles.css";
+import "yet-another-react-lightbox/plugins/captions.css";
 
 const photos = [
   {
@@ -27,26 +32,46 @@ const photos = [
 ];
 
 const PhotographyGallery = () => {
+  const [index, setIndex] = useState(-1);
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-      {photos.map((photo, index) => (
-        <div key={index} className="group overflow-hidden rounded-lg border bg-card shadow-sm">
-          <div className="aspect-square overflow-hidden">
-            <img 
-              src={photo.src} 
-              alt={photo.title}
-              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-          </div>
-          <div className="p-4">
-            <div className="flex justify-between items-start mb-1">
-              <h3 className="font-semibold text-lg">{photo.title}</h3>
-              <span className="text-xs font-medium px-2 py-1 bg-secondary rounded">{photo.category}</span>
+    <div className="p-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {photos.map((photo, i) => (
+          <div 
+            key={i} 
+            className="group overflow-hidden rounded-lg border bg-card shadow-sm cursor-pointer"
+            onClick={() => setIndex(i)}
+          >
+            <div className="aspect-square overflow-hidden">
+              <img 
+                src={photo.src} 
+                alt={photo.title}
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
             </div>
-            <p className="text-sm text-muted-foreground font-mono">{photo.details}</p>
+            <div className="p-4">
+              <div className="flex justify-between items-start mb-1">
+                <h3 className="font-semibold text-lg">{photo.title}</h3>
+                <span className="text-xs font-medium px-2 py-1 bg-secondary rounded">{photo.category}</span>
+              </div>
+              <p className="text-sm text-muted-foreground font-mono">{photo.details}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+
+      <Lightbox
+        index={index}
+        open={index >= 0}
+        close={() => setIndex(-1)}
+        plugins={[Captions]}
+        slides={photos.map((p) => ({
+          src: p.src,
+          title: p.title,
+          description: p.details,
+        }))}
+      />
     </div>
   );
 };
