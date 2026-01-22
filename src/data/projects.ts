@@ -12,6 +12,7 @@ export interface Project {
   tags: string[];
   imageUrl: string;
   sections: ProjectSection[];
+  gallery?: string[];
 }
 
 export const projectsData: Project[] = [
@@ -42,6 +43,12 @@ export const projectsData: Project[] = [
         imagePath: "/images/projects/trd-1.jpeg",
         reverse: true
       }
+    ],
+    gallery: [
+      "/images/projects/trd-1-pcb.png",
+      "/images/projects/trd-1-schematic.png",
+      "/images/projects/trd-1.jpeg",
+      "/images/projects/trd-1-empty.jpeg",
     ]
   },
 ];

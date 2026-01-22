@@ -34,7 +34,25 @@ const photos = [
     title: 'Snowy Squirrel',
     category: 'Landscape',
     details: 'ISO 200 | f/6.3 | 1/500s'
-  }
+  },
+  {
+    src: '/images/photography/snowy-south-table.JPG',
+    title: 'Winter South Table',
+    category: 'Landscape',
+    details: 'ISO 280 | f/6.3 | 1/500s'
+  },
+  {
+    src: '/images/photography/lake-waves.JPG',
+    title: 'Lake Ripples',
+    category: 'Landscape',
+    details: 'ISO 100 | f/7.1 | 1/400s'
+  },
+  {
+    src: '/images/photography/snow-fall.JPG',
+    title: 'Snow Fall',
+    category: 'Landscape',
+    details: 'ISO 16000 | f/5.6 | 1/500s'
+  },
 ];
 
 const PhotographyGallery = () => {
