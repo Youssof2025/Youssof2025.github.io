@@ -10,9 +10,9 @@ import {
 
 const Nav = () => {
   return (
-    <div className="flex w-full items-center justify-between px-6 py-4">
-      <NavigationMenu>
-        <NavigationMenuList>
+    <div className="flex w-full items-center justify-between px-4 py-4 md:px-6">
+      <NavigationMenu className="max-w-full overflow-x-auto">
+        <NavigationMenuList className="flex-nowrap">
           <NavigationMenuItem>
             <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
               <Link to="/">Home</Link>
@@ -39,7 +39,7 @@ const Nav = () => {
         </NavigationMenuList>
       </NavigationMenu>
 
-      <div className="flex items-center">
+      <div className="ml-2 flex items-center shrink-0">
         <ThemeToggle />
       </div>
     </div>
