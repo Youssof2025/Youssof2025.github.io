@@ -17,8 +17,7 @@ const About = () => {
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
             <p>
               I am an Electrical Engineering student at the 
-              <span className="text-foreground font-medium"> Colorado School of Mines</span>, 
-              where I am currently in my second semester of freshman year, but I am a junior by credits. My academic journey is centered around building a solid foundation in STEM, complemented by an interest in PCB-Design, board-assembly, and embedded systems.
+              <span className="text-foreground font-medium"> Colorado School of Mines</span>. I currently am in my freshman year, but I qualify as a junior by credits. My academic journey is centered around building a solid foundation in STEM, complemented by an interest in PCB-Design, board-assembly, hardware-design, and embedded systems.
             </p>
             
             <p>
@@ -26,7 +25,7 @@ const About = () => {
             </p>
 
             <p>
-              I am currently seeking an electrical engineering internships in the Dallas area for the summer of 2026.
+              I am currently searching for an electrical engineering internships in the Dallas area for the summer of 2026. Feel free to contact me at: youssof@youssoftech.dev
             </p>
           </div>
 
