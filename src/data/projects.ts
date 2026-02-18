@@ -19,7 +19,7 @@ export const projectsData: Project[] = [
   {
     id: "trd-1",
     title: "Thermocouple Reading Device (TRD-1)",
-    description: "A PCB Designed to measure the internal temperature of a custom made carbonfiber oven.",
+    description: "A PCB designed to measure the internal temperature of a custom made carbonfiber oven.",
     tags: ["Altium", "PCB-Design", "Board-Assembly"],
     imageUrl: "/images/projects/trd-1.jpeg",
     sections: [
@@ -49,6 +49,41 @@ export const projectsData: Project[] = [
       "/images/projects/trd-1-schematic.png",
       "/images/projects/trd-1.jpeg",
       "/images/projects/trd-1-empty.jpeg",
+    ]
+  },
+  {
+    id: "stm-devboard",
+    title: "Advanced STM32 Development Board",
+    description: "A development PCB designed to measure the internal temperature of a custom made carbonfiber oven.",
+    tags: ["STM32", "Buck-Converter", "Altium", "PCB-Design", "Board-Assembly"],
+    imageUrl: "/images/projects/devboard-full.jpg",
+    sections: [
+      {
+        type: "text",
+        text: "The Advanced STM32 Development board was designed to allow the software team to run more elaborate tests on the Mines FSAE car and be able to identify points of improvement."
+      },
+      {
+        type: "full-image",
+        imagePath: "/images/projects/devboard-pcb.png",
+      },
+      {
+        type: "side-by-side",
+        text: "Using Altium Designer, me and a teammate developed the schematic and focused on including a range of useful features for the software team. For instance, an SD-Card reader, CAN transceivers, SPI pins, I2C, JTAG for power redundancy, USB-C for power and data transfer, a tactile reset switch, a boot dip switch, and most importantly, arduino pins. The arduino pins are the most crucial part of the development board because it allows the utilization of an arduino uno for further testing purposes. The female header pins (J5, J6, J7, J8) are precisely measured to match the dimensions of an arduino uno. The board can handle up to 12V thanks to the buck-converter stepping down the voltage to 5V which the LDO can now step down even further to 3.3V which then goes into the rest of the components.",
+        imagePath: "/images/projects/devboard-schematic.png",
+        reverse: false
+      },
+      {
+        type: "side-by-side",
+        text: "The physical board assembly involved soldering all of the conectivity componnents (USB-C, CAN transceivers, JTAG, SPI, boot dip switch, etc). Due to an error in component ordering, the manufacturer did not have the necessary capacitors for the LDO which resulted in having to think of a more creative solution. In this case, we opted with using two 4.7 μF electrolytic capacitors in their place instead. Additionally, the manufacterer sent the wrong pins for SPI which resulted in us having to bend the bottom pins in order to make them fit on to the board. Nonetheless, board assembly was very successful with minimal to no damage on this development board. Finally, after placing the board in an ultrasonic cleaner to ensure that there are no bridged connections with any remaining loose solder, I plugged the board into a laptop using USB-C and the power LED lit up with no issues. The only remaining steps at this time is to hand the board over to the software team and allow them to do the necessary programmig using CubeIDE.",
+        imagePath: "/images/projects/devboard-full.jpg",
+        reverse: true
+      }
+    ],
+    gallery: [
+      "/images/projects/devboard-pcb.png",
+      "/images/projects/devboard-schematic.png",
+      "/images/projects/devboard-full.jpg",
+      "/images/projects/devboard-empty.jpg",
     ]
   },
 ];
