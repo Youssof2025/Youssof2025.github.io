@@ -6,6 +6,18 @@ import "yet-another-react-lightbox/plugins/captions.css";
 
 const photos = [
   {
+    src: '/images/photography/orions-belt.jpg',
+    title: 'Orion\'s Belt',
+    category: 'Astrophotography',
+    details: 'ISO 4000 | f/3.5 | 20s'
+  },
+  {
+    src: '/images/photography/starry-night.jpg',
+    title: 'Starry Night',
+    category: 'Astrophotography',
+    details: 'ISO 3200 | f/3.5 | 20s'
+  },
+  {
     src: '/images/photography/moon.jpg',
     title: 'The Moon',
     category: 'Astrophotography',
