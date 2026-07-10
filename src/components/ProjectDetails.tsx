@@ -19,7 +19,7 @@ import { Equation } from "@/components/Equation";
     <div className="max-w-5xl mx-auto py-12 px-6 space-y-16">
       <section>
         <h1 className="text-4xl font-extrabold mb-4">{project.title}</h1>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {project.tags.map(tag => (
             <span key={tag} className="px-3 py-1 bg-secondary rounded-full text-sm font-medium">
               {tag}
