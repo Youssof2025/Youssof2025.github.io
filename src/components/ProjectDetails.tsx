@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { projectsData } from "../data/projects";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import { Equation } from "@/components/Equation";
 
   const ProjectDetails = () => {
   const { projectId } = useParams();
@@ -47,6 +48,21 @@ import "yet-another-react-lightbox/styles.css";
               </div>
             );
           }
+
+          if (section.type === "equation") {
+          return (
+            <div key={index} className="flex flex-col items-center gap-2 -mt-14 first:mt-0">
+              <div className="overflow-x-auto rounded-lg border bg-card px-6 py-3">
+                <Equation math={section.math!} />
+              </div>
+              {section.caption && (
+                <p className="text-sm text-center text-muted-foreground italic">
+                  {section.caption}
+                </p>
+              )}
+            </div>
+          );
+        }
 
           if (section.type === "side-by-side") {
             return (
