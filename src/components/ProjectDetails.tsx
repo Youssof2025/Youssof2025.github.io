@@ -28,7 +28,7 @@ import { Equation } from "@/components/Equation";
         </div>
       </section>
 
-      <div className="space-y-20">
+      <div className="space-y-10">
         {project.sections.map((section, index) => {
           if (section.type === "full-image") {
             return (
@@ -51,7 +51,7 @@ import { Equation } from "@/components/Equation";
 
           if (section.type === "equation") {
           return (
-            <div key={index} className="flex flex-col items-center gap-2 -mt-14 first:mt-0">
+            <div key={index} className="flex flex-col items-center gap-2 -mt-6 first:mt-0">
               <div className="overflow-x-auto rounded-lg border bg-card px-6 py-3">
                 <Equation math={section.math!} />
               </div>

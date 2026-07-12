@@ -92,7 +92,7 @@ export const projectsData: Project[] = [
     id: "oscilloscope-summer",
     title: "Mini-Oscilloscope",
     description: "A 4-Layer PCB designed to measure voltage signals between -10 and +10 Volts.",
-    tags: ["Altium", "PCB-Design", "Board-Assembly", "Analog", "STM32", "ADC", "USB", "I2C", "Embedded systems", "Mixed-signal design"],
+    tags: ["Altium", "PCB-Design", "Board-Assembly", "Analog", "STM32", "ADC", "USB", "I2C", "Embedded systems", "Mixed-signal design", "LTSpice"],
     imageUrl: "/images/projects/Oscilloscope-routing-3D.png",
     sections: [
       {
@@ -154,6 +154,18 @@ export const projectsData: Project[] = [
         text: "With R8 and R10 solved as a coupled system rather than independently, the full ADC range now maps onto the ±10V signal I originally intended to measure.",
       },
       {
+        type: "full-image",
+        imagePath: "/images/projects/Oscilloscope-LTSpice.png"
+      },
+      {
+        type: "text",
+        text: "For a future re-design of this board, I simulated a simpler Op-Amp circuit in LTSpice that will perfectly fall within the ADC's range of 0V to 3.3V and therefore utilizing its full resolution. My original board used a two-resistor divider plus a separate op-amp stage just to generate the DC bias reference. This new design completely eliminates that extra stage entirely. A third resistor (R2) pulls the bias directly off the 3.3V rail into the same summing node as the input signal, so essentially one op-amp will do the trick.",
+      },
+      {
+        type: "text",
+        text: "With R1 = 1MΩ, R2 = 330kΩ, and R3 = 499kΩ, a ±10V input signal maps almost exactly onto the ADC's 0-3.3V range, which was verified by the simulation as it bottoms out at 0V and tops out at 3.3V, using the full ADC resolution rather than the previous 55% utilization my original design achieved.",
+      },
+      {
         type: "side-by-side",
         imagePath: "/images/projects/Oscilloscope-STM-schematic.png",
         text: "Here I decided to go with an STM32F0 series (STM32F070CBT6) due to it having USB Full-Speed peripheral, I2C, and ample GPIO pins for other components such as the ADC and LEDs. It also includes SPI and USART but I did not need these two protocols for this specific project. Additionally, I used STM32CubeMX to verify the pin layout when schematic capturing the project. I also chose this MCU because I liked its form factor and because it was cheap and did the job. I also decided to add an external oscillator to ensure accurate USB timing as well as for the ADC sampling. Initially, I was going to go with an RP2040 as the MCU for this project, but then I decided against it since I would need to include external flash memory for it as well."
@@ -184,6 +196,7 @@ export const projectsData: Project[] = [
       "/images/projects/Oscilloscope-Connectors-schematic.png",
       "/images/projects/Oscilloscope-Analog-schematic.png",
       "/images/projects/Oscilloscope-LDO-schematic.png",
+      "/images/projects/Oscilloscope-LTSpice.png",
       "/images/projects/Oscilloscope-routing-3D.png",
       "/images/projects/Oscilloscope-routing-2D.png",
       "/images/projects/Oscilloscope-MX.png",
