@@ -43,6 +43,22 @@ export const projectsData: Project[] = [
     ]
   },
   {
+    id: "HFSS Simulation",
+    title: "HFSS Simulation Study",
+    description: "A simulation designed to evaluate impedance matching and high-frequency signal integrity across a transmission line and connector interface.",
+    tags: ["Ansys HFSS"],
+    imageUrl: "/images/projects/HFSS_Simulation/HFSS_Sub.png",
+    sections: [
+      {
+      type: "text",
+      text: "HFSS Simulation write up coming soon! In the meantime, feel free to look at the project gallery :)"
+      },
+    ],
+    gallery: [
+      "/images/projects/HFSS_Simulation/HFSS_Animation.png",
+    ]
+  },
+  {
     id: "stm-devboard",
     title: "Advanced STM32 Development Board",
     description: "A development PCB designed to help troubleshoot an FSAE car using an Arduino.",
