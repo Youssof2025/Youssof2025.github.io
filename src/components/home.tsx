@@ -13,7 +13,7 @@ const Home = () => {
         Hi, I'm Youssof
       </h1>
       <p className="max-w-[700px] text-lg text-muted-foreground mb-8">
-        Freshman at Colorado School of Mines specializing in PCB-Design, hardware-design, and with a hobby in photography.
+        Junior at Colorado School of Mines specializing in PCB-Design, hardware-design, and with a hobby in photography.
       </p>
       <div className="flex flex-wrap justify-center gap-4 w-full max-w-[90vw]">
         <Button asChild>
