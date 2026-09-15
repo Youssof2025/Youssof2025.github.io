@@ -27,7 +27,32 @@ export const projectsData: Project[] = [
     sections: [
       {
       type: "text",
-      text: "ADC analog board write up coming soon! In the meantime, feel free to look at the project gallery :)"
+      text: "The analog-to-digital converter (ADC) data acquisition board is designed to gather data from various analog sensors around the car, such as linear potentiometers, steering wheel angle, brake pressure, accelerator position, etc. This is the first generation of this board, and it acts as the foundation for future implementations and improvements. Additionally, it is designed to decrease wiring harness complexity and ensure telemetry data accuracy."
+      },
+      {
+        type: "full-image",
+        imagePath: "/images/projects/ADC_Analog/ADC_Layout.png"
+      },
+      {
+        type: "text",
+        text: "Using a 34-pin AmpSeal connector allows for easy integration with the rest of the car’s harness. The board gets 12V for power through the AmpSeal and gets stepped down through a high-frequency synchronous buck converter that steps the voltage down to 6V. The board contains 4 separate LDOs; two are responsible for 5V digital and analog, while the other two are responsible for 3.3V analog and digital. The power tree architecture was designed to prioritize power efficiency and be cost-effective. The reason why I preferred a synchronous buck converter is due to the minimized voltage drop. Unlike an asynchronous buck, which utilizes a shotscky diode, which has around a 0.3-0.4 voltage drop across it, a MOSFET in a synchronous buck has almost no voltage drop, increasing the efficiency of the buck. To increase the debuggability of the power architecture, I have installed 6 separate LEDs that are directly connected to their respective voltages, allowing me to diagnose any faults within the power circuitry much more easily.Additionally, I also implemented a USB-C as an extra power source for the sake of convenience when programming the board, which will be done through a simple JTAG connector. Furthermore, an SD card has been implemented to allow for data logging to an SD card in case something happens to the main communication protocol for the board.",
+      },
+      {
+        type: "full-image",
+        imagePath: "/images/projects/ADC_Analog/ADC_Power.png",
+      },
+      {
+        type: "side-by-side",
+        text: "Speaking of the main communication protocol for the board, this year we have decided to implement server-grade Ethernet throughout the car. We ran the trade study as a team on whether or not automotive Ethernet is worth the extra cost, but the benefits would be very marginal at a much higher price increase. Therefore, we as a team decided to utilize the higher speeds of RMII Ethernet (100 Mbps), which we plan to never fully saturate.",
+        imagePath: "/images/projects/ADC_Analog/ADC_Ethernet.png",
+      },
+      {
+        type: "full-image",
+        imagePath: "/images/projects/ADC_Analog/ADC_3D.png",
+      },
+      {
+        type: "text",
+        text: "More write-up coming very soon :)",
       },
     ],
     gallery: [
