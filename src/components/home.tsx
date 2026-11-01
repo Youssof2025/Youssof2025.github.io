@@ -1,14 +1,21 @@
+import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Linkedin } from 'lucide-react';
-import PCBModel from "./PCBModel";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
+// three.js is heavy; load it after the rest of the page renders
+const PCBModel = lazy(() => import("./PCBModel"));
 
 
 const Home = () => {
+  usePageTitle();
+
   return (
     <div className="flex flex-col items-center justify-center min-h-[80vh] text-center px-4">
-      <PCBModel />
+      <Suspense fallback={<div className="w-full h-[400px]" />}>
+        <PCBModel />
+      </Suspense>
       <h1 className="text-5xl font-extrabold tracking-tight lg:text-6xl mb-6">
         Hi, I'm Youssof
       </h1>
@@ -22,11 +29,11 @@ const Home = () => {
         <Button variant="outline" asChild>
           <Link to="/photography">See Photography</Link>
         </Button>
-      
+
         <Button variant="outline" asChild>
-          <a 
-            href="/Youssof-Resume.pdf" 
-            target="_blank" 
+          <a
+            href="/Youssof-Resume.pdf"
+            target="_blank"
             rel="noopener noreferrer"
           >
             Resume
@@ -34,8 +41,8 @@ const Home = () => {
         </Button>
         <Button variant="linkedin" asChild>
           <a
-            href="https://www.linkedin.com/in/youssofsoliman" 
-            target="_blank" 
+            href="https://www.linkedin.com/in/youssofsoliman"
+            target="_blank"
             rel="noopener noreferrer"
           >
             <Linkedin className="size-4" />
@@ -44,7 +51,7 @@ const Home = () => {
         </Button>
       </div>
     </div>
-    
+
   );
 };
 

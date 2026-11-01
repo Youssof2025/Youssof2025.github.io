@@ -1,6 +1,9 @@
 import PhotographyGallery from "./PhotographyGallery"
+import { usePageTitle } from "@/hooks/usePageTitle"
 
 const Photography = () => {
+  usePageTitle("Photography")
+
   return (
     <div className="max-w-7xl mx-auto py-12 px-4">
       <h1 className="text-4xl font-bold mb-4">Photography</h1>

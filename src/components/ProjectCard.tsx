@@ -3,18 +3,18 @@ interface ProjectProps {
   description: string;
   tags: string[];
   imageUrl: string;
-  githubUrl?: string;
-  liveUrl?: string;
 }
 
 export const ProjectCard = ({ title, description, tags, imageUrl }: ProjectProps) => {
   return (
-    <div className="rounded-xl border bg-card overflow-hidden shadow-sm transition-hover hover:shadow-md">
-      
+    <div className="rounded-xl border bg-card overflow-hidden shadow-sm transition-shadow hover:shadow-md">
+
       <div className="aspect-video w-full overflow-hidden bg-muted">
-        <img 
-          src={imageUrl} 
-          alt={title} 
+        <img
+          src={imageUrl}
+          alt={title}
+          loading="lazy"
+          decoding="async"
           className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
         />
       </div>

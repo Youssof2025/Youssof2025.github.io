@@ -2,6 +2,7 @@ export interface ProjectSection {
   type: "text" | "side-by-side" | "full-image" | "equation";
   text?: string;
   imagePath?: string;
+  alt?: string;        // image description for screen readers; falls back to the file name
   reverse?: boolean;
   math?: string;       
   caption?: string;
@@ -19,11 +20,11 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
-    id: "ADC Analog Board",
+    id: "adc-analog-board",
     title: "ADC Analog Board",
     description: "A PCB designed to filter and clean the analog sensor data from 12 linear potentiometer inputs using a 16-bit ADC.",
     tags: ["Mixed-signal design", "Altium Designer", "PCB-Design", "Board-Assembly", "DAQ", "Ethernet (RMII)", "Formula SAE", "16-bit ADC", "Analog", "CAN", "STM32", "Layer Stack-up"],
-    imageUrl: "/images/projects/ADC_Analog/ADC_3D.png",
+    imageUrl: "/images/projects/ADC_Analog/ADC_3D.webp",
     sections: [
       {
       type: "text",
@@ -31,24 +32,24 @@ export const projectsData: Project[] = [
       },
       {
         type: "full-image",
-        imagePath: "/images/projects/ADC_Analog/ADC_Layout.png"
+        imagePath: "/images/projects/ADC_Analog/ADC_Layout.webp"
       },
       {
         type: "text",
-        text: "Using a 34-pin AmpSeal connector allows for easy integration with the rest of the car’s harness. The board gets 12V for power through the AmpSeal and gets stepped down through a high-frequency synchronous buck converter that steps the voltage down to 6V. The board contains 4 separate LDOs; two are responsible for 5V digital and analog, while the other two are responsible for 3.3V analog and digital. The power tree architecture was designed to prioritize power efficiency and be cost-effective. The reason why I preferred a synchronous buck converter is due to the minimized voltage drop. Unlike an asynchronous buck, which utilizes a shotscky diode, which has around a 0.3-0.4 voltage drop across it, a MOSFET in a synchronous buck has almost no voltage drop, increasing the efficiency of the buck. To increase the debuggability of the power architecture, I have installed 6 separate LEDs that are directly connected to their respective voltages, allowing me to diagnose any faults within the power circuitry much more easily.Additionally, I also implemented a USB-C as an extra power source for the sake of convenience when programming the board, which will be done through a simple JTAG connector. Furthermore, an SD card has been implemented to allow for data logging to an SD card in case something happens to the main communication protocol for the board.",
+        text: "Using a 34-pin AmpSeal connector allows for easy integration with the rest of the car’s harness. The board gets 12V for power through the AmpSeal and gets stepped down through a high-frequency synchronous buck converter that steps the voltage down to 6V. The board contains 4 separate LDOs; two are responsible for 5V digital and analog, while the other two are responsible for 3.3V analog and digital. The power tree architecture was designed to prioritize power efficiency and be cost-effective. The reason why I preferred a synchronous buck converter is due to the minimized voltage drop. Unlike an asynchronous buck, which utilizes a Schottky diode, which has around a 0.3-0.4V voltage drop across it, a MOSFET in a synchronous buck has almost no voltage drop, increasing the efficiency of the buck. To increase the debuggability of the power architecture, I have installed 6 separate LEDs that are directly connected to their respective voltages, allowing me to diagnose any faults within the power circuitry much more easily. Additionally, I also implemented a USB-C as an extra power source for the sake of convenience when programming the board, which will be done through a simple JTAG connector. Furthermore, an SD card has been implemented to allow for data logging to an SD card in case something happens to the main communication protocol for the board.",
       },
       {
         type: "full-image",
-        imagePath: "/images/projects/ADC_Analog/ADC_Power.png",
+        imagePath: "/images/projects/ADC_Analog/ADC_Power.webp",
       },
       {
         type: "side-by-side",
         text: "Speaking of the main communication protocol for the board, this year we have decided to implement server-grade Ethernet throughout the car. We ran the trade study as a team on whether or not automotive Ethernet is worth the extra cost, but the benefits would be very marginal at a much higher price increase. Therefore, we as a team decided to utilize the higher speeds of RMII Ethernet (100 Mbps), which we plan to never fully saturate.",
-        imagePath: "/images/projects/ADC_Analog/ADC_Ethernet.png",
+        imagePath: "/images/projects/ADC_Analog/ADC_Ethernet.webp",
       },
       {
         type: "full-image",
-        imagePath: "/images/projects/ADC_Analog/ADC_3D.png",
+        imagePath: "/images/projects/ADC_Analog/ADC_3D.webp",
       },
       {
         type: "text",
@@ -56,23 +57,23 @@ export const projectsData: Project[] = [
       },
     ],
     gallery: [
-      "/images/projects/ADC_Analog/ADC_Layout.png",
-      "/images/projects/ADC_Analog/ADC_3D.png",
-      "/images/projects/ADC_Analog/ADC_STM.png",
-      "/images/projects/ADC_Analog/ADC_Top.png",
-      "/images/projects/ADC_Analog/ADC_Connectors.png",
-      "/images/projects/ADC_Analog/ADC_Ethernet.png",
-      "/images/projects/ADC_Analog/ADC_LowPass.png",
-      "/images/projects/ADC_Analog/ADC_PGA.png",
-      "/images/projects/ADC_Analog/ADC_Power.png"
+      "/images/projects/ADC_Analog/ADC_Layout.webp",
+      "/images/projects/ADC_Analog/ADC_3D.webp",
+      "/images/projects/ADC_Analog/ADC_STM.webp",
+      "/images/projects/ADC_Analog/ADC_Top.webp",
+      "/images/projects/ADC_Analog/ADC_Connectors.webp",
+      "/images/projects/ADC_Analog/ADC_Ethernet.webp",
+      "/images/projects/ADC_Analog/ADC_LowPass.webp",
+      "/images/projects/ADC_Analog/ADC_PGA.webp",
+      "/images/projects/ADC_Analog/ADC_Power.webp"
     ]
   },
   {
-    id: "HFSS Simulation",
+    id: "hfss-simulation",
     title: "HFSS Simulation Study",
     description: "A simulation designed to evaluate impedance matching and high-frequency signal integrity across a transmission line and connector interface.",
     tags: ["Ansys HFSS"],
-    imageUrl: "/images/projects/HFSS_Simulation/HFSS_Sub.png",
+    imageUrl: "/images/projects/HFSS_Simulation/HFSS_Sub.webp",
     sections: [
       {
       type: "text",
@@ -80,7 +81,7 @@ export const projectsData: Project[] = [
       },
     ],
     gallery: [
-      "/images/projects/HFSS_Simulation/HFSS_Animation.png",
+      "/images/projects/HFSS_Simulation/HFSS_Animation.webp",
     ]
   },
   {
@@ -88,7 +89,7 @@ export const projectsData: Project[] = [
     title: "Advanced STM32 Development Board",
     description: "A development PCB designed to help troubleshoot an FSAE car using an Arduino.",
     tags: ["STM32", "Buck-Converter", "Altium", "PCB-Design", "Board-Assembly"],
-    imageUrl: "/images/projects/Dev_Board/devboard-full.jpg",
+    imageUrl: "/images/projects/Dev_Board/devboard-full.webp",
     sections: [
       {
         type: "text",
@@ -96,26 +97,26 @@ export const projectsData: Project[] = [
       },
       {
         type: "full-image",
-        imagePath: "/images/projects/Dev_Board/devboard-pcb.png",
+        imagePath: "/images/projects/Dev_Board/devboard-pcb.webp",
       },
       {
         type: "side-by-side",
         text: "Using Altium Designer, me and a teammate developed the schematic and focused on including a range of useful features for the software team. For instance, an SD-Card reader, CAN transceivers, SPI pins, I2C, JTAG for power redundancy, USB-C for power and data transfer, a tactile reset switch, a boot dip switch, and most importantly, arduino pins. The arduino pins are the most crucial part of the development board because it allows the utilization of an arduino uno for further testing purposes. The female header pins (J5, J6, J7, J8) are precisely measured to match the dimensions of an arduino uno. The board can handle up to 12V thanks to the buck-converter stepping down the voltage to 5V which the LDO can now step down even further to 3.3V which then goes into the rest of the components. Additionally, there is reverse polarity protection on the board as well as electrostatic shock protection.",
-        imagePath: "/images/projects/Dev_Board/devboard-schematic.png",
+        imagePath: "/images/projects/Dev_Board/devboard-schematic.webp",
         reverse: false
       },
       {
         type: "side-by-side",
         text: "The physical board assembly involved soldering all of the conectivity componnents (USB-C, CAN transceivers, JTAG, SPI, boot dip switch, etc). Due to an error in component ordering, the manufacturer did not have the necessary capacitors for the LDO which resulted in having to think of a more creative solution. In this case, we opted with using two 4.7 μF electrolytic capacitors in their place instead. Additionally, the manufacterer sent the wrong pins for SPI which resulted in us having to bend the bottom pins in order to make them fit on to the board. Nonetheless, board assembly was very successful with minimal to no damage on this development board. Finally, after placing the board in an ultrasonic cleaner to ensure that there are no bridged connections with any remaining loose solder, I plugged the board into a laptop using USB-C and the power LED lit up with no issues. The only remaining steps at this time is to hand the board over to the software team and allow them to do the necessary programmig using CubeIDE.",
-        imagePath: "/images/projects/Dev_Board/devboard-full.jpg",
+        imagePath: "/images/projects/Dev_Board/devboard-full.webp",
         reverse: true
       }
     ],
     gallery: [
-      "/images/projects/Dev_Board/devboard-pcb.png",
-      "/images/projects/Dev_Board/devboard-schematic.png",
-      "/images/projects/Dev_Board/devboard-full.jpg",
-      "/images/projects/Dev_Board/devboard-empty.jpg",
+      "/images/projects/Dev_Board/devboard-pcb.webp",
+      "/images/projects/Dev_Board/devboard-schematic.webp",
+      "/images/projects/Dev_Board/devboard-full.webp",
+      "/images/projects/Dev_Board/devboard-empty.webp",
     ]
   },
   {
@@ -123,7 +124,7 @@ export const projectsData: Project[] = [
     title: "Mini-Oscilloscope",
     description: "A 4-Layer PCB designed to measure voltage signals between -10 and +10 Volts.",
     tags: ["Altium", "PCB-Design", "Board-Assembly", "Analog", "STM32", "ADC", "USB", "I2C", "Embedded systems", "Mixed-signal design", "LTSpice"],
-    imageUrl: "/images/projects/Oscilloscope/Oscilloscope-routing-3D.png",
+    imageUrl: "/images/projects/Oscilloscope/Oscilloscope-routing-3D.webp",
     sections: [
       {
         type: "text",
@@ -131,7 +132,7 @@ export const projectsData: Project[] = [
       },
       {
         type: "full-image",
-        imagePath: "/images/projects/Oscilloscope/Oscilloscope-routing-2D.png",
+        imagePath: "/images/projects/Oscilloscope/Oscilloscope-routing-2D.webp",
       },
       {
         type: "text",
@@ -156,7 +157,7 @@ export const projectsData: Project[] = [
       },
       {
         type: "full-image",
-        imagePath: "/images/projects/Oscilloscope/Oscilloscope-Analog-schematic.png",
+        imagePath: "/images/projects/Oscilloscope/Oscilloscope-Analog-schematic.webp",
       },
       {
         type: "text",
@@ -185,7 +186,7 @@ export const projectsData: Project[] = [
       },
       {
         type: "full-image",
-        imagePath: "/images/projects/Oscilloscope/Oscilloscope-LTSpice.png"
+        imagePath: "/images/projects/Oscilloscope/Oscilloscope-LTSpice.webp"
       },
       {
         type: "text",
@@ -197,23 +198,23 @@ export const projectsData: Project[] = [
       },
       {
         type: "side-by-side",
-        imagePath: "/images/projects/Oscilloscope/Oscilloscope-STM-schematic.png",
+        imagePath: "/images/projects/Oscilloscope/Oscilloscope-STM-schematic.webp",
         text: "Here I decided to go with an STM32F0 series (STM32F070CBT6) due to it having USB Full-Speed peripheral, I2C, and ample GPIO pins for other components such as the ADC and LEDs. It also includes SPI and USART but I did not need these two protocols for this specific project. Additionally, I used STM32CubeMX to verify the pin layout when schematic capturing the project. I also chose this MCU because I liked its form factor and because it was cheap and did the job. I also decided to add an external oscillator to ensure accurate USB timing as well as for the ADC sampling. Initially, I was going to go with an RP2040 as the MCU for this project, but then I decided against it since I would need to include external flash memory for it as well."
       },
       {
         type: "full-image",
-        imagePath: "/images/projects/Oscilloscope/Oscilloscope-MX.png",
+        imagePath: "/images/projects/Oscilloscope/Oscilloscope-MX.webp",
       },
       {
         type: "side-by-side",
         reverse: true,
-        imagePath: "/images/projects/Oscilloscope/Oscilloscope-Connectors-schematic.png",
+        imagePath: "/images/projects/Oscilloscope/Oscilloscope-Connectors-schematic.webp",
         text: "For the connectivity of this board, I decided to keep it simple. I included a USB-C for both powering the board and also programming it in C++ using STM32CubeIDE. D3 is an ESD protection diode as an additional safety barrier against static. Furthermore, I decided to use a 4 pin female header to connect an external 0.96 inch OLED I2C screen to the board and use it as the oscilloscope's display. Additionally, I added a 1kHz test pin so that I can confirm the functionality of the baord and ensure no glaring issues with the ADC or the board. The encoder here is to navigate through the screen and also adjust any necessary values once the board is programmed.",
       },
       {
         type: "side-by-side",
         reverse: true,
-        imagePath: "/images/projects/Oscilloscope/Oscilloscope-LDO-schematic.png",
+        imagePath: "/images/projects/Oscilloscope/Oscilloscope-LDO-schematic.webp",
         text: "For this board's power management I decided to go with a very simple LDO setup where it takes in 5V from the USB and output 3.3V to use throughout the entire board. The layer stackup of this board was very simple: Layer 1 - Signal, Layer 2 - 3.3V Power, Layer 3 - GND, Layer 4 - Signal. Having dedicated Power and GND layers made routing much easier and much more effecient since I could simply via into the desired plane whenever I need either power or GND.",
       },
       {
@@ -222,15 +223,15 @@ export const projectsData: Project[] = [
       },
     ],
     gallery: [
-      "/images/projects/Oscilloscope/Oscilloscope-STM-schematic.png",
-      "/images/projects/Oscilloscope/Oscilloscope-Connectors-schematic.png",
-      "/images/projects/Oscilloscope/Oscilloscope-Analog-schematic.png",
-      "/images/projects/Oscilloscope/Oscilloscope-LDO-schematic.png",
-      "/images/projects/Oscilloscope/Oscilloscope-LTSpice.png",
-      "/images/projects/Oscilloscope/Oscilloscope-routing-3D.png",
-      "/images/projects/Oscilloscope/Oscilloscope-routing-2D.png",
-      "/images/projects/Oscilloscope/Oscilloscope-MX.png",
-      "/images/projects/Oscilloscope/Oscilloscope-Hollow-Knight.png",
+      "/images/projects/Oscilloscope/Oscilloscope-STM-schematic.webp",
+      "/images/projects/Oscilloscope/Oscilloscope-Connectors-schematic.webp",
+      "/images/projects/Oscilloscope/Oscilloscope-Analog-schematic.webp",
+      "/images/projects/Oscilloscope/Oscilloscope-LDO-schematic.webp",
+      "/images/projects/Oscilloscope/Oscilloscope-LTSpice.webp",
+      "/images/projects/Oscilloscope/Oscilloscope-routing-3D.webp",
+      "/images/projects/Oscilloscope/Oscilloscope-routing-2D.webp",
+      "/images/projects/Oscilloscope/Oscilloscope-MX.webp",
+      "/images/projects/Oscilloscope/Oscilloscope-Hollow-Knight.webp",
     ]
   },
   {
@@ -238,7 +239,7 @@ export const projectsData: Project[] = [
     title: "Thermocouple Reading Device (TRD-1)",
     description: "A PCB designed to measure the internal temperature of a custom made carbonfiber oven.",
     tags: ["Altium", "PCB-Design", "Board-Assembly"],
-    imageUrl: "/images/projects/TRD/trd-1.jpeg",
+    imageUrl: "/images/projects/TRD/trd-1.webp",
     sections: [
       {
         type: "text",
@@ -246,26 +247,26 @@ export const projectsData: Project[] = [
       },
       {
         type: "full-image",
-        imagePath: "/images/projects/TRD/trd-1-pcb.png",
+        imagePath: "/images/projects/TRD/trd-1-pcb.webp",
       },
       {
         type: "side-by-side",
         text: "Using Altium Designer, I developed the schematic and focused on using a high-accuracy thermocouple signal to handle the wide temperature ranges required by the oven. I created 4 different schematics: an STM32 schematic, a power handling schematic with an LDO and LED status indicator, a connections schematic handling the high-speed USB-C signal, and a thermocouple signal circuit schematic designed to detect a temperature difference and amplify the signal into a usable volate range.",
-        imagePath: "/images/projects/TRD/trd-1-schematic.png",
+        imagePath: "/images/projects/TRD/trd-1-schematic.webp",
         reverse: false
       },
       {
         type: "side-by-side",
         text: "The physical board assembly involved precision soldering and component placement to maintain signal integrity in a high-temperature environment. It involed soldering 0402 resistors and capacitors in very specific spots, a USB-C port, an STM32, and a wide variety of components such as a JTAG and tactile switches. It taught me how to effectively use a soldering iron, a heat gun, flux, a reflow oven, and how to trouble shoot certain issues such as bridged connections. Additionally, the USB-C port proved to be difficult to solder since it was the wrong configuration for this board and would not create a stable connection. Hence, the headers and JTAG connectors will be utilized for power and signal.",
-        imagePath: "/images/projects/TRD/trd-1.jpeg",
+        imagePath: "/images/projects/TRD/trd-1.webp",
         reverse: true
       }
     ],
     gallery: [
-      "/images/projects/TRD/trd-1-pcb.png",
-      "/images/projects/TRD/trd-1-schematic.png",
-      "/images/projects/TRD/trd-1.jpeg",
-      "/images/projects/TRD/trd-1-empty.jpeg",
+      "/images/projects/TRD/trd-1-pcb.webp",
+      "/images/projects/TRD/trd-1-schematic.webp",
+      "/images/projects/TRD/trd-1.webp",
+      "/images/projects/TRD/trd-1-empty.webp",
     ]
   },
 ];

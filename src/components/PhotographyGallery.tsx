@@ -6,66 +6,69 @@ import "yet-another-react-lightbox/plugins/captions.css";
 
 const photos = [
   {
-    src: '/images/photography/orions-belt.jpg',
+    src: '/images/photography/orions-belt.webp',
     title: 'Orion\'s Belt',
     category: 'Astrophotography',
     details: 'ISO 4000 | f/3.5 | 20s'
   },
   {
-    src: '/images/photography/starry-night.jpg',
+    src: '/images/photography/starry-night.webp',
     title: 'Starry Night',
     category: 'Astrophotography',
     details: 'ISO 3200 | f/3.5 | 20s'
   },
   {
-    src: '/images/photography/moon.jpg',
+    src: '/images/photography/moon.webp',
     title: 'The Moon',
     category: 'Astrophotography',
     details: 'ISO 125 | f/11 | 1/200s'
   },
   {
-    src: '/images/photography/snowy-path.JPG',
+    src: '/images/photography/snowy-path.webp',
     title: 'Snowy Path',
     category: 'Landscape',
     details: 'ISO 360 | f/6.3 | 1/500s'
   },
   {
-    src: '/images/photography/mountain-valley.JPG',
+    src: '/images/photography/mountain-valley.webp',
     title: 'Mountain Valley',
     category: 'Landscape',
     details: 'ISO 100 | f/8 | 1/400s'
   },
   {
-    src: '/images/photography/sunny-mountain.JPG',
+    src: '/images/photography/sunny-mountain.webp',
     title: 'Mountain Side',
     category: 'Landscape',
     details: 'ISO 100 | f/6.3 | 1/320s'
   },
   {
-    src: '/images/photography/squirrel-in-snow.jpg',
+    src: '/images/photography/squirrel-in-snow.webp',
     title: 'Snowy Squirrel',
     category: 'Landscape',
     details: 'ISO 200 | f/6.3 | 1/500s'
   },
   {
-    src: '/images/photography/snowy-south-table.JPG',
+    src: '/images/photography/snowy-south-table.webp',
     title: 'Winter South Table',
     category: 'Landscape',
     details: 'ISO 280 | f/6.3 | 1/500s'
   },
   {
-    src: '/images/photography/lake-waves.JPG',
+    src: '/images/photography/lake-waves.webp',
     title: 'Lake Ripples',
     category: 'Landscape',
     details: 'ISO 100 | f/7.1 | 1/400s'
   },
   {
-    src: '/images/photography/snow-fall.JPG',
+    src: '/images/photography/snow-fall.webp',
     title: 'Snow Fall',
     category: 'Landscape',
     details: 'ISO 16000 | f/5.6 | 1/500s'
   },
 ];
+
+// 800px previews live in photography/thumbs/ under the same file name
+const thumbOf = (src: string) => src.replace("/photography/", "/photography/thumbs/");
 
 const PhotographyGallery = () => {
   const [index, setIndex] = useState(-1);
@@ -74,15 +77,19 @@ const PhotographyGallery = () => {
     <div className="p-4">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {photos.map((photo, i) => (
-          <div 
-            key={i} 
-            className="group overflow-hidden rounded-lg border bg-card shadow-sm cursor-pointer"
+          <button
+            type="button"
+            key={i}
+            className="group overflow-hidden rounded-lg border bg-card shadow-sm cursor-pointer text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             onClick={() => setIndex(i)}
+            aria-label={`Open ${photo.title}`}
           >
             <div className="aspect-square overflow-hidden">
-              <img 
-                src={photo.src} 
+              <img
+                src={thumbOf(photo.src)}
                 alt={photo.title}
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
               />
             </div>
@@ -93,7 +100,7 @@ const PhotographyGallery = () => {
               </div>
               <p className="text-sm text-muted-foreground font-mono">{photo.details}</p>
             </div>
-          </div>
+          </button>
         ))}
       </div>
 
