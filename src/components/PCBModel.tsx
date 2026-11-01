@@ -1,23 +1,25 @@
 import { Canvas } from "@react-three/fiber";
 import { useGLTF, OrbitControls, Center } from "@react-three/drei";
-import { Suspense, useRef } from "react";
+import { Suspense, useEffect } from "react";
 import * as THREE from "three";
 
 function PCB() {
   const { scene } = useGLTF("/TRD3.glb");
 
-  // Fix materials + visibility (once)
-  scene.traverse((obj) => {
-    if ((obj as THREE.Mesh).isMesh) {
-      const mesh = obj as THREE.Mesh;
+  // Fix materials + visibility (once per loaded scene)
+  useEffect(() => {
+    scene.traverse((obj) => {
+      if ((obj as THREE.Mesh).isMesh) {
+        const mesh = obj as THREE.Mesh;
 
-      if (Array.isArray(mesh.material)) {
-        mesh.material.forEach((m) => (m.side = THREE.DoubleSide));
-      } else {
-        mesh.material.side = THREE.DoubleSide;
+        if (Array.isArray(mesh.material)) {
+          mesh.material.forEach((m) => (m.side = THREE.DoubleSide));
+        } else {
+          mesh.material.side = THREE.DoubleSide;
+        }
       }
-    }
-  });
+    });
+  }, [scene]);
 
   return (
     <Center>
@@ -32,8 +34,6 @@ function PCB() {
 }
 
 export default function PCBModel() {
-  const controlsRef = useRef<any>(null);
-
   return (
     <Canvas
       camera={{ position: [0, 1.5, 4], fov: 45 }}
@@ -49,7 +49,6 @@ export default function PCBModel() {
       </Suspense>
 
       <OrbitControls
-        ref={controlsRef}
         target={[0, 0, 0]}     // 🔑 correct pivot
         enablePan={false}
         enableZoom={false}

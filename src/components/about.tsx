@@ -1,4 +1,8 @@
+import { usePageTitle } from "@/hooks/usePageTitle";
+
 const About = () => {
+  usePageTitle("About");
+
   return (
     <div className="max-w-5xl mx-auto py-12 px-6">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
@@ -6,7 +10,7 @@ const About = () => {
           <div className="aspect-square rounded-2xl overflow-hidden border-4 border-muted shadow-xl">
             <img 
               src="/images/profile.jpg" 
-              alt="Professional portrait" 
+              alt="Portrait of Youssof Soliman"
               className="w-full h-full object-cover"
             />
           </div>
@@ -17,15 +21,18 @@ const About = () => {
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
             <p>
               I am an Electrical Engineering student at the 
-              <span className="text-foreground font-medium"> Colorado School of Mines</span>. I currently am in my sophmore year and will be taking junior level classes next semester. My graduation date is planned to be May 2028. My academic journey is centered around building a solid foundation in STEM, complemented by an interest in PCB-Design, board-assembly, hardware-design, and embedded systems.
+              <span className="text-foreground font-medium"> Colorado School of Mines</span>. My graduation date is planned to be May 2028. My academic journey is centered around building a solid foundation in STEM, complemented by an interest in PCB-Design, board-assembly, hardware-design, and embedded systems.
             </p>
             
             <p>
-              Beyond the classroom, I enjoy physical activity such as bouldering, hiking, and lifting. Additionally, I enjoy nature and landscape photography in my freetime since it allows me to express my creativity.
+              Beyond the classroom, I enjoy physical activity such as bouldering, hiking, and lifting. Additionally, I enjoy nature and landscape photography in my free time since it allows me to express my creativity.
             </p>
 
             <p>
-              I am currently searching for an electrical engineering internships for the summer of 2027. Feel free to contact me at: youssof@youssoftech.dev
+              I am currently searching for electrical engineering internships for the summer of 2027. Feel free to contact me at:{" "}
+              <a href="mailto:youssof@youssoftech.dev" className="text-foreground font-medium underline underline-offset-4 hover:text-primary">
+                youssof@youssoftech.dev
+              </a>
             </p>
           </div>
 
