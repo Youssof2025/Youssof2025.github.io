@@ -1,10 +1,12 @@
 export interface ProjectSection {
-  type: "text" | "side-by-side" | "full-image" | "equation";
+  type: "text" | "side-by-side" | "full-image" | "equation" | "heading" | "model";
   text?: string;
+  level?: 2 | 3;       // heading only: 2 = header (default), 3 = subheader
+  modelPath?: string;  // model only: .glb in /public/models; imagePath becomes its preview image
   imagePath?: string;
   alt?: string;        // image description for screen readers; falls back to the file name
   reverse?: boolean;
-  math?: string;       
+  math?: string;
   caption?: string;
 }
 
@@ -27,6 +29,17 @@ export const projectsData: Project[] = [
     imageUrl: "/images/projects/ADC_Analog/ADC_3D.webp",
     sections: [
       {
+        type: "model",
+        modelPath: "/models/adc-analog-board.glb",
+        imagePath: "/images/projects/ADC_Analog/ADC_3D.webp",
+        text: "Drag to rotate the board",
+      },
+      { type: "heading", text: "Introduction"},
+      {
+        type: "text",
+        text: "Before I begin talking about the intricacies of this board, I want to first say that I feel proud of this board and what I was able to accomplish as an electrical engineer. Secondly, I want to give a little context about the purpose of this board as well as why we as a team at Mines Formula decided that this was the right approach for our vehicle and data aquisition system. I will try my best to take you along this journey in as chronological of an order as possible so that you can envision what I was thinking and sort of follow along with the design process of this board.",
+      },
+      {
       type: "text",
       text: "The analog-to-digital converter (ADC) data acquisition board is designed to gather data from various analog sensors around the car, such as linear potentiometers, steering wheel angle, brake pressure, accelerator position, etc. This is the first generation of this board, and it acts as the foundation for future implementations and improvements. Additionally, it is designed to decrease wiring harness complexity and ensure telemetry data accuracy."
       },
@@ -34,6 +47,7 @@ export const projectsData: Project[] = [
         type: "full-image",
         imagePath: "/images/projects/ADC_Analog/ADC_Layout.webp"
       },
+      { type: "heading", text: "Power Architecture" },
       {
         type: "text",
         text: "Using a 34-pin AmpSeal connector allows for easy integration with the rest of the car’s harness. The board gets 12V for power through the AmpSeal and gets stepped down through a high-frequency synchronous buck converter that steps the voltage down to 6V. The board contains 4 separate LDOs; two are responsible for 5V digital and analog, while the other two are responsible for 3.3V analog and digital. The power tree architecture was designed to prioritize power efficiency and be cost-effective. The reason why I preferred a synchronous buck converter is due to the minimized voltage drop. Unlike an asynchronous buck, which utilizes a Schottky diode, which has around a 0.3-0.4V voltage drop across it, a MOSFET in a synchronous buck has almost no voltage drop, increasing the efficiency of the buck. To increase the debuggability of the power architecture, I have installed 6 separate LEDs that are directly connected to their respective voltages, allowing me to diagnose any faults within the power circuitry much more easily. Additionally, I also implemented a USB-C as an extra power source for the sake of convenience when programming the board, which will be done through a simple JTAG connector. Furthermore, an SD card has been implemented to allow for data logging to an SD card in case something happens to the main communication protocol for the board.",
@@ -92,6 +106,12 @@ export const projectsData: Project[] = [
     imageUrl: "/images/projects/Dev_Board/devboard-full.webp",
     sections: [
       {
+        type: "model",
+        modelPath: "/models/stm-devboard.glb",
+        imagePath: "/images/projects/Dev_Board/devboard-pcb.webp",
+        text: "Drag to rotate the board",
+      },
+      {
         type: "text",
         text: "The Advanced STM32 Development board was designed to allow the software team to run more elaborate tests on the Mines FSAE car and be able to identify points of improvement."
       },
@@ -126,6 +146,12 @@ export const projectsData: Project[] = [
     tags: ["Altium", "PCB-Design", "Board-Assembly", "Analog", "STM32", "ADC", "USB", "I2C", "Embedded systems", "Mixed-signal design", "LTSpice"],
     imageUrl: "/images/projects/Oscilloscope/Oscilloscope-routing-3D.webp",
     sections: [
+      {
+        type: "model",
+        modelPath: "/models/oscilloscope-summer.glb",
+        imagePath: "/images/projects/Oscilloscope/Oscilloscope-routing-3D.webp",
+        text: "Drag to rotate the board (the Hollow Knight is on the back)",
+      },
       {
         type: "text",
         text: "This Mini-Oscilloscope is a 4-layer PCB project designed to aid me in learning as much as possible about analog and digital PCB design. It was initially designed to measure signals between -10 and +10 volts. It includes a BNC connector and a mechanical encoder for adjusting the scale and navigate through the 0.96 Inch I2C OLED screen. As a little fun touch to this board, I added the main character of my favorite game 'Hollow Knight' as a silkscreen to the back of the board."
@@ -241,6 +267,12 @@ export const projectsData: Project[] = [
     tags: ["Altium", "PCB-Design", "Board-Assembly"],
     imageUrl: "/images/projects/TRD/trd-1.webp",
     sections: [
+      {
+        type: "model",
+        modelPath: "/models/trd-1.glb",
+        imagePath: "/images/projects/TRD/trd-1.webp",
+        text: "Drag to rotate the assembled board",
+      },
       {
         type: "text",
         text: "The TRD-1 was developed to monitor the internal temperatures for a custom built carbon fiber oven for the Mines Formula SAE team, ensuring precise thermal monitoring during the curing process to ensure optimal results for the car."
