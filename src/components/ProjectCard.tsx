@@ -12,7 +12,7 @@ export const ProjectCard = ({ title, description, tags, imageUrl }: ProjectProps
       <div className="aspect-video w-full overflow-hidden bg-muted">
         <img
           src={imageUrl}
-          alt={title}
+          alt=""  // decorative: the card's heading already names the project
           loading="lazy"
           decoding="async"
           className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
@@ -20,7 +20,7 @@ export const ProjectCard = ({ title, description, tags, imageUrl }: ProjectProps
       </div>
 
       <div className="p-6">
-        <h3 className="text-xl font-bold mb-2">{title}</h3>
+        <h2 className="text-xl font-bold mb-2">{title}</h2>
         <p className="text-muted-foreground mb-4 leading-relaxed text-sm">
           {description}
         </p>

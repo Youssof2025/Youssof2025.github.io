@@ -1,4 +1,5 @@
 import katex from "katex";
+import "katex/dist/katex.min.css"; // loaded with the first equation, not on every page
 import { useMemo } from "react";
 
 interface EquationProps {

@@ -1,19 +1,49 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
-import { projectsData } from "../data/projects";
+import { useEffect, useMemo, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import { projectsData, type ProjectSection } from "../data/projects";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { Equation } from "@/components/Equation";
 import NotFound from "@/components/NotFound";
+import { TableOfContents, type TocEntry } from "@/components/TableOfContents";
+import { ModelViewer } from "@/components/ModelViewer";
 import { usePageTitle } from "@/hooks/usePageTitle";
-import { altFromPath } from "@/lib/utils";
+import { altFromPath, slugify } from "@/lib/utils";
+
+// Gives every heading section a unique anchor id, keyed by its section index
+function buildToc(sections: ProjectSection[]) {
+  const used = new Map<string, number>();
+  const ids = new Map<number, string>();
+  const entries: TocEntry[] = [];
+
+  sections.forEach((section, i) => {
+    if (section.type !== "heading" || !section.text) return;
+    const base = slugify(section.text);
+    const count = used.get(base) ?? 0;
+    used.set(base, count + 1);
+    const id = count ? `${base}-${count + 1}` : base;
+
+    ids.set(i, id);
+    entries.push({ id, text: section.text, level: section.level ?? 2 });
+  });
+
+  return { ids, entries };
+}
 
 const ProjectDetails = () => {
   const { projectId } = useParams();
+  const { hash } = useLocation();
   const project = projectsData.find((p) => p.id === projectId);
 
   const [index, setIndex] = useState(-1);
   usePageTitle(project?.title ?? "Not Found");
+
+  const toc = useMemo(() => buildToc(project?.sections ?? []), [project]);
+
+  // The page loads lazily, so the browser can't jump to a #heading link on its own
+  useEffect(() => {
+    if (hash) document.getElementById(decodeURIComponent(hash.slice(1)))?.scrollIntoView();
+  }, [hash, project]);
 
   if (!project) return <NotFound message="That project doesn't exist (yet)." />;
 
@@ -32,8 +62,40 @@ const ProjectDetails = () => {
         </div>
       </section>
 
+      {toc.entries.length >= 2 && <TableOfContents entries={toc.entries} />}
+
       <div className="space-y-10">
         {project.sections.map((section, index) => {
+          if (section.type === "heading") {
+            const id = toc.ids.get(index);
+            return section.level === 3 ? (
+              <h3 key={index} id={id} className="scroll-mt-8 text-2xl font-semibold">
+                {section.text}
+              </h3>
+            ) : (
+              <h2 key={index} id={id} className="scroll-mt-8 text-3xl font-bold border-b pb-3 pt-6">
+                {section.text}
+              </h2>
+            );
+          }
+
+          if (section.type === "model" && section.modelPath) {
+            return (
+              <div key={index} className="space-y-4">
+                <ModelViewer
+                  src={section.modelPath}
+                  poster={section.imagePath}
+                  alt={section.alt ?? `${project.title} 3D model`}
+                />
+                {section.text && (
+                  <p className="text-sm text-center text-muted-foreground italic">
+                    {section.text}
+                  </p>
+                )}
+              </div>
+            );
+          }
+
           if (section.type === "full-image") {
             return (
               <div key={index} className="space-y-4">

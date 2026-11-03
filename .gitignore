@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Source CAD exports (large; only compressed models in public/models are deployed)
+cad/

@@ -8,8 +8,8 @@ const About = () => {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
         <div className="md:col-span-5">
           <div className="aspect-square rounded-2xl overflow-hidden border-4 border-muted shadow-xl">
-            <img 
-              src="/images/profile.jpg" 
+            <img
+              src="/images/profile.jpg"
               alt="Portrait of Youssof Soliman"
               className="w-full h-full object-cover"
             />
@@ -17,13 +17,13 @@ const About = () => {
         </div>
         <div className="md:col-span-7 space-y-6">
           <h1 className="text-4xl font-bold tracking-tight">About Me</h1>
-          
+
           <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
             <p>
-              I am an Electrical Engineering student at the 
-              <span className="text-foreground font-medium"> Colorado School of Mines</span>. My graduation date is planned to be May 2028. My academic journey is centered around building a solid foundation in STEM, complemented by an interest in PCB-Design, board-assembly, hardware-design, and embedded systems.
+              I am an Electrical Engineering student at the
+              <span className="text-foreground font-medium"> Colorado School of Mines</span>. My planned graduation date is May 2028. My academic journey is centered around building a solid foundation in STEM, complemented by an interest in PCB-Design, board-assembly, hardware-design, and embedded systems.
             </p>
-            
+
             <p>
               Beyond the classroom, I enjoy physical activity such as bouldering, hiking, and lifting. Additionally, I enjoy nature and landscape photography in my free time since it allows me to express my creativity.
             </p>
@@ -43,11 +43,11 @@ const About = () => {
           </div>
         </div>
       </div>
-    
+
       <div className="space-y-8">
         <h2 className="text-3xl font-bold border-b pb-4">Technical Skills</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          
+
           {/* Engineering Skills */}
           <div className="p-6 rounded-xl border bg-card space-y-4">
             <h3 className="text-xl font-semibold text-primary">Electrical Engineering</h3>
