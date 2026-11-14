@@ -62,7 +62,8 @@ const { data } = await send("Page.captureScreenshot", { format: "png" });
 fs.writeFileSync(out, Buffer.from(data, "base64"));
 
 ws.close();
-await new Promise((r) => { proc.once("exit", r); proc.kill(); });
+// The browser may already have quit (e.g. after a very tall capture); waiting on "exit" would then hang
+if (proc.exitCode === null && proc.signalCode === null) await new Promise((r) => { proc.once("exit", r); proc.kill(); });
 // Edge's helper processes can hold the profile a moment longer on Windows; cleanup is best-effort
 try {
   fs.rmSync(profile, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });

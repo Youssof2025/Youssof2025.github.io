@@ -37,37 +37,103 @@ export const projectsData: Project[] = [
       { type: "heading", text: "Introduction"},
       {
         type: "text",
-        text: "Before I begin talking about the intricacies of this board, I want to first say that I feel proud of this board and what I was able to accomplish as an electrical engineer. Secondly, I want to give a little context about the purpose of this board as well as why we as a team at Mines Formula decided that this was the right approach for our vehicle and data aquisition system. I will try my best to take you along this journey in as chronological of an order as possible so that you can envision what I was thinking and sort of follow along with the design process of this board.",
+        text: "Before I begin talking about the intricacies of this board, I want to first say that I feel the most proud of this board and what I was able to accomplish with it. Secondly, I want to give a little context about the purpose of this board as well as why we as a team at Mines Formula decided that this was the right approach for our vehicle and data acquisition system. I will try my best to take you along this journey in as chronological an order as possible so that you can envision what I was thinking and sort of follow along with the design process of this board.",
       },
+      {type: "heading", text: "High-level general overview of the board", level: 3},
       {
       type: "text",
-      text: "The analog-to-digital converter (ADC) data acquisition board is designed to gather data from various analog sensors around the car, such as linear potentiometers, steering wheel angle, brake pressure, accelerator position, etc. This is the first generation of this board, and it acts as the foundation for future implementations and improvements. Additionally, it is designed to decrease wiring harness complexity and ensure telemetry data accuracy."
+      text: "Due to the naturally noisy and harsh environment of a race car, the analog sensors on the car will experience electrical noise that will impact the data they send over to the data acquisition system. So, the analog-to-digital converter (ADC) data acquisition board is designed to gather data from various analog sensors around the car, such as linear potentiometers, steering wheel angle, brake pressure, accelerator position, etc, and run it through a 16-bit ADC to digitize the analog signals and produce reliable and consistent telemetry data. This is the first generation of this board, and it acts as the foundation for future implementations and improvements. "
       },
       {
         type: "full-image",
-        imagePath: "/images/projects/ADC_Analog/ADC_Layout.webp"
+        imagePath: "/images/projects/ADC_Analog/ADC_Top.webp",
+        alt: "Top-level schematic sheet showing the board's functional blocks and revision history",
+        text: "Top-level schematic: how the board's sections connect",
+      },
+      {type: "heading", text: "Overall integration with the system architecture", level: 3},
+      {
+        type: "text",
+        text: "Of course, the ADC board does not work alone, it works in unison with an entire DAQ system that produces all of our telemetry data. In essence, the data collection begins with this board and another one called the Digital Node Board (appropriately responsible for the digital sensors) which are then connected to the “main” board (Screen Link) acting as the VCU. Additionally, we use a 34-pin automotive grade AMPSEAL to ensure constant and reliable connections at all times between the different electrical systems."
+      },
+      {
+        type: "full-image",
+        imagePath: "/images/projects/ADC_Analog/ADC_Connectors.webp",
+        alt: "Connector schematic with the 34-pin AMPSEAL pinout, CAN transceiver, USB-C, JTAG and SD card",
+        text: "Connectors: the 34-pin AMPSEAL that links the board to the car, plus CAN, USB-C (power only), JTAG and an SD card",
+      },
+      {type: "heading", text: "Why this is the right approach for us", level: 3},
+      {
+        type: "text",
+        text: "We split acquisition into dedicated analog and digital nodes so that sensor signals are digitized close to where they’re measured. Only clean digital data crosses the car, and long analog runs never get the chance to pick up noise. This year we also chose Ethernet as the link back to Screen Link, deliberately as an experiment. CAN has served us well, but as we sample more data and add more channels we can run into bandwidth issues, so we expanded into ethernet to have more headroom to grow. In the future, we want to incorporate more systems engineering into our overall architecture so that we push ourselves even further and ultimately place higher on the leader board for the final competition in May."
+      },
+      { type: "heading", text: "Board Stackup" },
+      {
+        type: "text",
+        text: "This board is 4 layers, which I decided would be sufficient to fit all of the signals as well as make the two middle layers full ground planes. Now, I must admit that fitting all of the power pours as well as signals on the 4th layer was a challenge, but it just took some careful routing and a lot of tries. The middle two layers were non-negotiably going to be ground so that there are uninterrupted return paths for the 50 MHz RMII bus between the STM32 and the PHY. A high-frequency return current flows on the plane directly under its trace. An unbroken plane keeps the loop small, and a small loop radiates less and picks up less noise, mitigating any EMI issues that might hinder the functionality of the board"
       },
       { type: "heading", text: "Power Architecture" },
       {
         type: "text",
-        text: "Using a 34-pin AmpSeal connector allows for easy integration with the rest of the car’s harness. The board gets 12V for power through the AmpSeal and gets stepped down through a high-frequency synchronous buck converter that steps the voltage down to 6V. The board contains 4 separate LDOs; two are responsible for 5V digital and analog, while the other two are responsible for 3.3V analog and digital. The power tree architecture was designed to prioritize power efficiency and be cost-effective. The reason why I preferred a synchronous buck converter is due to the minimized voltage drop. Unlike an asynchronous buck, which utilizes a Schottky diode, which has around a 0.3-0.4V voltage drop across it, a MOSFET in a synchronous buck has almost no voltage drop, increasing the efficiency of the buck. To increase the debuggability of the power architecture, I have installed 6 separate LEDs that are directly connected to their respective voltages, allowing me to diagnose any faults within the power circuitry much more easily. Additionally, I also implemented a USB-C as an extra power source for the sake of convenience when programming the board, which will be done through a simple JTAG connector. Furthermore, an SD card has been implemented to allow for data logging to an SD card in case something happens to the main communication protocol for the board.",
+        text: "Usually, I feel that the power architecture of any board allows me to be very creative with how I deliver power to the entire board. For instance, how many LDOs do I want? What voltage should I buck down to? These are some questions that I always ask myself at the beginning of any power architecture design so that I have a fundamental idea of what I need to do. In the case of this board, I decided that the power architecture would take 12V and use a buck converter to bring it down to 6V, which takes care of the majority of the bulk stepping down, and since this buck converter has an efficiency of around 86%, it would dissipate the least amount of heat as well as power dissipation. Whereas the efficiency of an LDO is just its output voltage over its input voltage, which would cause a lot of power and heat dissipation. The 6V then goes to 4 LDOs that split the analog and digital rails into 5V and 3.3V. Additionally, since a buck converter leaves a lot of switching ripple on its outputs, I did not want that switching ripple to reach the ADC, and so the LDOs attenuates that ripple and prevents most of it from reaching any component and supplying a steady and clean voltage.",
       },
       {
         type: "full-image",
         imagePath: "/images/projects/ADC_Analog/ADC_Power.webp",
+        alt: "Power schematic: 12V to 6V synchronous buck converter, then LDOs to the 5V and 3.3V analog and digital rails",
+        text: "Power: the 12V → 6V synchronous buck, then LDOs that split the 5V and 3.3V analog and digital rails",
       },
-      {
-        type: "side-by-side",
-        text: "Speaking of the main communication protocol for the board, this year we have decided to implement server-grade Ethernet throughout the car. We ran the trade study as a team on whether or not automotive Ethernet is worth the extra cost, but the benefits would be very marginal at a much higher price increase. Therefore, we as a team decided to utilize the higher speeds of RMII Ethernet (100 Mbps), which we plan to never fully saturate.",
-        imagePath: "/images/projects/ADC_Analog/ADC_Ethernet.webp",
+      { type: "heading", text: "ADC" },
+      { 
+        type: "text", 
+        text: "The ADS114S08B is the core of the board: every analog sensor on the car passes through it. Each of the 12 inputs has its own RC filter, 1 kΩ and 100 nF, giving a cutoff frequency of about 1.6kHz. The filters sit ahead of the multiplexer, so each capacitor stays charged to its channel’s voltage while the ADC reads the other channels. They cut RF, buck switching noise and content near the modulator’s 256 kHz sampling frequency by about 44 dB. The 1 kΩ is small enough that the ADC’s nanoamp-level input current adds only microvolts of error. The ADC’s reference is tied to 5V_A, and the board sends that same rail out through four AMPSEAL pins to power the sensors, so the measurement is ratiometric. Each sensor’s output scales with its supply, so drift and noise on 5V_A appear in both the signal and the reference and cancel out. It also gives a full 0–5 V input range without dividers. Because the reference sits at the analog supply, I bypass the ADC’s internal reference buffer, as the datasheet recommends. The converter runs at 4,000 SPS with its low-latency digital filter, which produces a fully settled result in a single conversion. Each channel switch restarts the conversion, so a full 12-channel scan takes about 5.5 ms, or roughly 180 samples per second per channel. It talks to the STM32H563 over SPI. For Gen 2, I’d lower the filter corner closer to the bandwidth the sensors actually need, so that noise above the per-channel Nyquist frequency can’t alias into the data."
       },
       {
         type: "full-image",
-        imagePath: "/images/projects/ADC_Analog/ADC_3D.webp",
+        imagePath: "/images/projects/ADC_Analog/ADC_PGA.webp",
+        alt: "ADS114S08B ADC schematic with its pin connections",
+        text: "The ADS114S08B and its connections",
+      },
+      {
+        type: "full-image",
+        imagePath: "/images/projects/ADC_Analog/ADC_LowPass_Crop.webp",
+        alt: "RC low-pass filter: a 1 kΩ resistor in series with the input and a 100 nF capacitor to ground",
+        text: "The input RC filter (1 kΩ, 100 nF), repeated for each of the 12 channels",
+      },
+      { type: "heading", text: "Ethernet" },
+      {
+        type: "text",
+        text: "This year the team moved the DAQ network from CAN to Ethernet. We ran a trade study on automotive Ethernet (100BASE-T1), which uses a single twisted pair, against standard 100BASE-TX. T1’s lighter harness and built-in EMI robustness didn’t justify its higher PHY cost and limited part selection. 100BASE-TX parts are inexpensive and well documented, and they connect straight to a laptop for debugging. Therefore, we as a team decided to utilize 100BASE-TX, which we plan to (hopefully) never fully saturate. On this board, a LAN8742A PHY connects to the STM32H563’s Ethernet controller over RMII, a 2-bit, 50 MHz interface. The board’s own data, about 35 kbit/s across all 12 channels, uses a tiny fraction of the 100 Mbit/s link. The headroom is for the system as a whole, as we use more nodes and need higher sample rates in the future."
+      },
+      {
+        type: "full-image",
+        imagePath: "/images/projects/ADC_Analog/ADC_Ethernet.webp",
+        alt: "Ethernet schematic with the LAN8742A PHY, transformer and status LEDs",
+        text: "Ethernet: the LAN8742A PHY, the transformer (magnetics) and the link status LEDs",
+      },
+      {
+        type: "full-image",
+        imagePath: "/images/projects/ADC_Analog/ADC_STM.webp",
+        alt: "STM32H563 microcontroller schematic",
+        text: "The STM32H563, which runs the ADC over SPI and the PHY over RMII",
+      },
+      { type: "heading", text: "Board Design and Layout" },
+      {
+        type: "full-image",
+        imagePath: "/images/projects/ADC_Analog/ADC_Layout.webp",
+        alt: "PCB layout in Altium with the top layer in red and the bottom layer in blue",
+        text: "The routed board in Altium: top layer in red, bottom layer in blue",
       },
       {
         type: "text",
-        text: "More write-up coming very soon :)",
+        text: "Now, board design and layout is the most enjoyable part of the process to me because I feel like I can truly be creative and design a board that works. It is also where a lot of things can go wrong if not being careful. There are a lot of considerations that I have to take into mind. For instance, decoupling caps must be placed as close as possible to their respective ICs, uninterrupted ground planes are crucial under high speed traces, do not run different signal traces in parallel for too long, add ground vias nearby when switching between the top and bottom layers on signal traces, etc. But having to take things like this into consideration is exactly what makes the whole process fun to me because they provide a set of requirements that I must uphold at all times. The highest-stakes area was the TPS56339 buck. Over several review passes in Altium, I tightened the loop between the input capacitor and the converter and kept the switch-node copper small. I also kept both well away from the analog section. The ADC and the 12 filtered inputs sit near the AMPSEALs, on the opposite side of the board from the MCU and the PHY. Their traces never run parallel to the RMII bus or SPI lines, so the noisy digital signals can’t couple into them. The entire board fits in about 2×2 inches, so space was the constraint behind every routing decision. The tightest area was Ethernet. The RMII lines are sampled on a shared 50 MHz clock, so they had to be length-matched to one another, and I had to plan the PHY’s placement around fitting those matched lengths. The pairs from the PHY to the magnetics are routed as 100 Ω differential pairs.  Constraints like these are what make layout fun for me: they’re a set of requirements I have to satisfy all at once, on every net."
+      },
+      { type: "heading", text: "Board Testing, Validation, and Bring-up" },
+      {
+        type: "side-by-side",
+        imagePath: "/images/projects/ADC_Analog/ADC_Back.webp",
+        alt: "Back of the ADC board with Mines Formula silkscreen artwork",
+        reverse: true,
+        text: "JLCPCB fabricated the board, and I assembled (and fixed) some of the components by hand. For instance, JLCPCB reversed the orientation of the Buck-converter zener diode, so I had to resolve it by hand. Additionally, before even thinking about powering the board, I had to make sure that there were no major shorts between any of the power rails and ground, since that could be catastrophic and potentially fry an essential component on the board. I used continuity mode on my digital multimeter and manually checked between all of the rails and ground. Thankfully, there were no shorts so not much correction had to be done there. I manually soldered on the buck converter fuse, can transceiver, and any headers on the board. After confirming that no shorts were present on the board, I connected the board to my STLink first to see if it can handle 3.3V of power and for me to also try and program a blinking LED to see if the board is functional. I used STM32Cube to generate the code files and then edited them in vscode and successfully made the programmable LED on the board blink. After that, I connected the board to my power supply and supplied it with 12V through the AMPSEAL pin since I had not yet soldered it on. I wanted to verify the functionality of the ADC before handing it off to the software team, which I was able to do through a series of software tests. Finally, a few teammates and I connected the full DAQ system to verify Ethernet. Screen Link pinged the ADC board, and it answered. That one reply confirmed the PHY, the RMII interface, the STM32’s Ethernet controller and the network stack all working end to end. Seeing it come back was one of the most exciting moments of the project for us."
       },
     ],
     gallery: [
@@ -79,7 +145,8 @@ export const projectsData: Project[] = [
       "/images/projects/ADC_Analog/ADC_Ethernet.webp",
       "/images/projects/ADC_Analog/ADC_LowPass.webp",
       "/images/projects/ADC_Analog/ADC_PGA.webp",
-      "/images/projects/ADC_Analog/ADC_Power.webp"
+      "/images/projects/ADC_Analog/ADC_Power.webp",
+      "/images/projects/ADC_Analog/ADC_Back.webp"
     ]
   },
   {
